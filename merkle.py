@@ -2,6 +2,8 @@
 # code heavily based on:
 # http://stackoverflow.com/questions/2358045/how-can-i-implement-a-tree-in-python-are-there-any-built-in-data-structures-in
 # modified to work with hashes as a merkle tree
+# author Dario Clavijo 2016
+# GPLv3
 
 import hashlib
 
