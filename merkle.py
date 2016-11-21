@@ -7,7 +7,7 @@ import hashlib
 def sha256(data):
 	m = hashlib.sha256()
 	m.update(data)
-	return int(m.digest().encode('hex'),16)
+	return int(m.hexdigest(),16)
 	
 class Node:
     """
@@ -18,8 +18,9 @@ class Node:
         self.data = value
         self.right = None
 	self.hash = sha256(self.data)
+	self.isRoot = False
     def __repr__(self,):
-	return "node: %x64s, data: [%s]" % (self.hash,self.data)
+	return "__repr__ node: %64x, data: [%s]" % (self.hash,self.data)
 
 class Tree:
     """
@@ -62,6 +63,7 @@ class Tree:
 	return self.search_by_hash(node,sha256(data))
 
     def searchByHash(self,node,hash):
+	#print node.hash,hash
 	if node is None or node.hash == hash:
 	    return node
         if node.hash < hash:
@@ -71,7 +73,6 @@ class Tree:
 
 	
     def deleteNode(self,node,data):
-	hash = sha256(data)
         """
         Delete function will delete a node into tree.
         Not complete , may need some more scenarion that we can handle
@@ -80,7 +81,10 @@ class Tree:
 	return self.deleteNodeByHash(node,sha256(data))
 
     def deleteNodeByHash(self,node,hash):
-        # Check if tree is empty.
+
+	assert (node.isRoot == False),"Can not delete root leaf"
+        
+	# Check if tree is empty.
         if node is None:
             return None
 
