@@ -33,6 +33,7 @@ class Tree:
     def __init__(self,):
 	self.rootHash = None	
 	self.leafcount=0
+	self.hasRoot=False
 
     def __repr__(self,):
 	return "__repr__ rootHash: %64x, total_leafs: %d" % (self.rootHash,self.leafcount)
@@ -70,7 +71,11 @@ class Tree:
         return Node(data,isRoot)
 
     def insert(self, node , data,isRoot=False):
+
+	assert (isRoot == False or self.hasRoot == False), "Only one root"
+
 	hash = sha256(data)
+
         """
         Insert function will insert a node into tree.
         Duplicate keys are not allowed.
@@ -79,7 +84,10 @@ class Tree:
         if node is None:
 	    #print "empty"
 	    if isRoot == True:
-		self.rootHash = hash
+		if self.hasRoot == False:
+		    self.hasRoot = True
+		    self.rootHash = hash
+
             return self.createNode(data,isRoot)
         # if hash is smaller than parent , insert it into left side
         if hash < node.hash:

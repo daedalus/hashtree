@@ -27,8 +27,9 @@ def main():
 
     print "searchByHash 55008645c4762121a80a51cb14cfe3c441b54cfb027e24330451ae04dac4376b"
     print tree.searchByHash(root,int("55008645c4762121a80a51cb14cfe3c441b54cfb027e24330451ae04dac4376b",16))
+
+    print "deleteNodeByHash"
     try:
-    	print "deleteNodeByHash"
     	print tree.deleteNodeByHash(root,int("55008645c4762121a80a51cb14cfe3c441b54cfb027e24330451ae04dac4376b",16))
     except:
 	print "can not delete root leaf"
@@ -38,5 +39,10 @@ def main():
     print "longestPath"
     print len(tree.Path(root))
 
+    print "insertRoot"
+    try:
+    	tree.insert(root, "leaf: root",isRoot=True)
+    except:
+	print "Only one root"
 if __name__ == "__main__":
     main()
