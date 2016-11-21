@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # code heavily based on:
 # http://stackoverflow.com/questions/2358045/how-can-i-implement-a-tree-in-python-are-there-any-built-in-data-structures-in
+# modified to work with hashes as a merkle tree
 
 import hashlib
 
