@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# author Dario Clavijo 2016
+# GPLv3
+
 from merkle import Node,Tree
 
 def main():
