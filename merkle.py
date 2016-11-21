@@ -37,6 +37,33 @@ class Tree:
     def __repr__(self,):
 	return "__repr__ rootHash: %64x, total_leafs: %d" % (self.rootHash,self.leafcount)
 
+    def Path(self,root,longest=True):
+
+	def argmax(lst1, lst2): return lst1 if len(lst1) > len(lst2) else lst2
+	def argmin(lst1, lst2): return lst1 if len(lst1) < len(lst2) else lst2
+
+
+	rightpath = []
+       	leftpath = []
+  	path = []
+  	if root is None:
+    	    return []
+  	if (root.right is None) and (root.left is None):
+    	    return [root.hash]
+	elif root.right is not None:
+	     rightpath = [root.hash] + self.Path(root.right,longest)
+	elif root.left is not None:
+             leftpath = [root.hash] + self.Path(root.left,longest)
+	
+	if longest:
+		return argmax(rightpath, leftpath)
+	else:
+		return argmin(rightpath, leftpath)
+
+		
+    
+
+
     def createNode(self, data, isRoot=False):
         """
         Utility function to create a node.

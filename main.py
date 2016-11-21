@@ -35,5 +35,8 @@ def main():
 
     print tree
 
+    print "longestPath"
+    print len(tree.Path(root))
+
 if __name__ == "__main__":
     main()
