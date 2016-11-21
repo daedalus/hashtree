@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # author Dario Clavijo 2016
 # GPLv3
-
+import time
 from merkle import Node,Tree
 
 def main():
@@ -44,5 +44,14 @@ def main():
     	tree.insert(root, "leaf: root",isRoot=True)
     except:
 	print "Only one root"
+
+    print "timing..."
+    t0 = time.clock()
+    for i in range(0,100000):
+	last = tree.insert(root,"leaf %d" % i)
+    t1 = time.clock()	
+    delta = t1-t0
+    print "ticks: %f CPU sec, %f sec per insert" % (delta,delta/100000)
+
 if __name__ == "__main__":
     main()
