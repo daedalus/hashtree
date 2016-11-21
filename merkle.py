@@ -16,27 +16,35 @@ class Node:
     """
     Class Node
     """
-    def __init__(self, value):
+    def __init__(self, value,isRoot=False):
         self.left = None
         self.data = value
         self.right = None
 	self.hash = sha256(self.data)
-	self.isRoot = False
+	self.isRoot = isRoot
     def __repr__(self,):
-	return "__repr__ node: %64x, data: [%s]" % (self.hash,self.data)
+	return "__repr__ node: %64x, isRoot: %s, data: [%s]" % (self.hash,self.isRoot,self.data)
 
 class Tree:
     """
     Class tree will provide a tree as well as utility functions.
     """
 
-    def createNode(self, data):
+    def __init__(self,):
+	self.rootHash = None	
+	self.leafcount=0
+
+    def __repr__(self,):
+	return "__repr__ rootHash: %64x, total_leafs: %d" % (self.rootHash,self.leafcount)
+
+    def createNode(self, data, isRoot=False):
         """
         Utility function to create a node.
         """
-        return Node(data)
+	self.leafcount += 1
+        return Node(data,isRoot)
 
-    def insert(self, node , data):
+    def insert(self, node , data,isRoot=False):
 	hash = sha256(data)
         """
         Insert function will insert a node into tree.
@@ -45,7 +53,9 @@ class Tree:
         #if tree is empty , return a root node
         if node is None:
 	    #print "empty"
-            return self.createNode(data)
+	    if isRoot == True:
+		self.rootHash = hash
+            return self.createNode(data,isRoot)
         # if hash is smaller than parent , insert it into left side
         if hash < node.hash:
             node.left = self.insert(node.left, data)
@@ -53,7 +63,6 @@ class Tree:
         elif hash > node.hash:
             node.right = self.insert(node.right, data)  
 	    #print "right"
-		
         return node
 
 

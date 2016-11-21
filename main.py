@@ -7,10 +7,10 @@ from merkle import Node,Tree
 def main():
     root = None
     tree = Tree()
-    root = tree.insert(root, "leaf: root")
-    root.isRoot = True
+    root = tree.insert(root, "leaf: root",isRoot=True)
 
     print "root"
+    print tree
     print root
 
     for i in range(0,20):
@@ -32,6 +32,8 @@ def main():
     	print tree.deleteNodeByHash(root,int("55008645c4762121a80a51cb14cfe3c441b54cfb027e24330451ae04dac4376b",16))
     except:
 	print "can not delete root leaf"
+
+    print tree
 
 if __name__ == "__main__":
     main()
