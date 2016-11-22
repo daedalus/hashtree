@@ -2,7 +2,7 @@
 # author Dario Clavijo 2016
 # GPLv3
 import time
-from merkle import Node,Tree
+from hashtree import Node,Tree
 
 def main():
     root = None
@@ -15,6 +15,10 @@ def main():
 
     for i in range(0,20):
         tree.insert(root, "leaf: %s" % i)
+
+    print "insertDupes"
+    for i in range(0,10):
+	tree.insert(root,'leaf Dupe')
 
     print "Traverse Inorder"
     tree.traverseInorder(root)
@@ -45,9 +49,9 @@ def main():
     except:
 	print "Only one root"
 
-    print "timing..."
+    print "timing 1000000 insetions:"
     t0 = time.clock()
-    for i in range(0,100000):
+    for i in range(0,1000000):
 	last = tree.insert(root,"leaf %d" % i)
     t1 = time.clock()	
     delta = t1-t0
