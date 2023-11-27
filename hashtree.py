@@ -39,8 +39,10 @@ class Tree:
 	"""
 	Path computation function
 	"""
-	def argmax(lst1, lst2): return lst1 if len(lst1) > len(lst2) else lst2
-	def argmin(lst1, lst2): return lst1 if len(lst1) < len(lst2) else lst2
+	def argmax(self, lst2):
+		return self if len(self) > len(lst2) else lst2
+	def argmin(self, lst2):
+		return self if len(self) < len(lst2) else lst2
 
 	rightpath = []
        	leftpath = []
